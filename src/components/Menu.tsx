@@ -119,26 +119,31 @@ const menuItems = [
 
 const Menu = () => {
   return (
-    <div className="mt-4 text-sm">
-      {menuItems.map((i) => (
-        <div className="flex flex-col gap-2" key={i.title}>
-          <span className="hidden lg:block text-gray-400 font-light my-4">
-            {i.title}
+    <div className="h-full flex flex-col text-xs justify-between">
+      {menuItems.map((section, sectionIndex) => (
+        <div 
+          className={`flex flex-col ${sectionIndex === 0 ? 'flex-1' : 'flex-shrink-0'}`} 
+          key={section.title}
+        >
+          <span className="hidden lg:block text-gray-400 font-light mb-1 text-[10px]">
+            {section.title}
           </span>
-          {i.items.map((item) => {
-            if (item.visible.includes(role)) {
-              return (
-                <Link
-                  href={item.href}
-                  key={item.label}
-                  className="flex items-center justify-center lg:justify-start gap-4 text-gray-500 py-2 md:px-2 rounded-md hover:bg-skyLight"
-                >
-                  <Image src={item.icon} alt="" width={20} height={20} />
-                  <span className="hidden lg:block">{item.label}</span>
-                </Link>
-              );
-            }
-          })}
+          <div className={`flex flex-col ${sectionIndex === 0 ? 'justify-evenly flex-1' : 'gap-1'}`}>
+            {section.items.map((item) => {
+              if (item.visible.includes(role)) {
+                return (
+                  <Link
+                    href={item.href}
+                    key={item.label}
+                    className="flex items-center justify-center lg:justify-start gap-2 text-gray-500 py-1 md:px-2 rounded-md hover:bg-skyLight"
+                  >
+                    <Image src={item.icon} alt="" width={18} height={18} />
+                    <span className="hidden lg:block text-[11px]">{item.label}</span>
+                  </Link>
+                );
+              }
+            })}
+          </div>
         </div>
       ))}
     </div>
