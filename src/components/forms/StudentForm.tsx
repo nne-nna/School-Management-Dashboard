@@ -1,4 +1,4 @@
-// TeacherForm.tsx - Mobile Optimized
+// StudentForm.tsx - Mobile Optimized
 "use client"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form"
@@ -27,7 +27,7 @@ const schema = z.object({
 
 type Inputs = z.infer<typeof schema>
 
-const TeacherForm = ({
+const StudentForm = ({
         type,
         data,
     }: { 
@@ -49,7 +49,7 @@ const TeacherForm = ({
 
     return (
         <form className="flex flex-col gap-2 sm:gap-6 md:gap-8 p-2 sm:p-0" onSubmit={onSubmit}>
-            <h1 className="text-base sm:text-xl font-semibold mb-1 sm:mb-0">Create a new teacher</h1>
+            <h1 className="text-base sm:text-xl font-semibold mb-1 sm:mb-0">Create a new student</h1>
             
             <span className="text-xs text-gray-400 font-medium mb-1 sm:mb-0">
                 Authentication Information
@@ -176,10 +176,10 @@ const TeacherForm = ({
             </div>
             
             <button className="bg-blue-400 hover:bg-blue-500 text-white p-2 sm:p-3 rounded-md transition-colors w-full sm:w-auto sm:self-start text-sm sm:text-base mt-2 sm:mt-0">
-                {type === "create" ? "Create Teacher" : "Update Teacher"}
+                {type === "create" ? "Create Student" : "Update Student"}
             </button>
         </form>
     )
 }
 
-export default TeacherForm;
+export default StudentForm;

@@ -1,7 +1,35 @@
 "use client"
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useState } from "react";
+// import TeacherForm from "./forms/TeacherForm";
+// import StudentForm from "./forms/StudentForm";
+
+const TeacherForm = dynamic(() => import("./forms/TeacherForm"),{
+    loading:() => <h1>Loading...</h1>
+})
+const StudentForm = dynamic(() => import("./forms/StudentForm"),{
+    loading:() => <h1>Loading...</h1>
+})
+const ParentForm = dynamic(() => import("./forms/ParentForm"));
+const ClassForm = dynamic(() => import("./forms/ClassForm"));
+const SubjectForm = dynamic(() => import("./forms/SubjectForm"));
+const LessonForm = dynamic(() => import("./forms/LessonForm"));
+const ExamForm = dynamic(() => import("./forms/ExamForm"));
+const AssignmentForm = dynamic(() => import("./forms/AssignmentForm"));
+const ResultForm = dynamic(() => import("./forms/ResultForm"));
+const AttendanceForm = dynamic(() => import("./forms/AttendanceForm"));
+const EventForm = dynamic(() => import("./forms/EventForm"));
+const AnnouncementForm = dynamic(() => import("./forms/AnnouncementForm"));
+
+
+const forms:{
+    [key:string] : (type:"create" | "update", data?:any) => JSX.Element;
+}={
+    teacher: (type,data) => <TeacherForm type={type} data={data} />,
+    student: (type,data) => <StudentForm type={type} data={data} />,
+}
 
 const FormModal = ({
     table,
@@ -45,14 +73,14 @@ const FormModal = ({
                     Delete
                 </button>
             </form>
-        ) : (
-            "create or update form"
-        );
+        ) : type === "create" || type === "update" ? (
+            forms[table](type, data)
+        ) : "Form not found!";
     } 
 
     return (
         <>
-            <button 
+            <button
                 className={`${size} flex items-center justify-center rounded-full ${bgColor}`}
                 onClick={() => setOpen(true)}
             >

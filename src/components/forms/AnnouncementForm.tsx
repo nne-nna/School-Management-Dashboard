@@ -1,4 +1,3 @@
-// TeacherForm.tsx - Mobile Optimized
 "use client"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form"
@@ -27,7 +26,7 @@ const schema = z.object({
 
 type Inputs = z.infer<typeof schema>
 
-const TeacherForm = ({
+const AnnouncementForm = ({
         type,
         data,
     }: { 
@@ -48,52 +47,40 @@ const TeacherForm = ({
         });
 
     return (
-        <form className="flex flex-col gap-2 sm:gap-6 md:gap-8 p-2 sm:p-0" onSubmit={onSubmit}>
-            <h1 className="text-base sm:text-xl font-semibold mb-1 sm:mb-0">Create a new teacher</h1>
-            
-            <span className="text-xs text-gray-400 font-medium mb-1 sm:mb-0">
+        <form className="flex flex-col gap-8" onSubmit={onSubmit}>
+            <h1 className="text-xl font-semibold">Create a new teacher</h1>
+            <span className="text-xs text-gray-400 font-medium">
                 Authentication Information
             </span>
-            
-            {/* Authentication Section - Mobile: 2 columns, Tablet+: 2 per row, Desktop: 3 per row */}
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
-                <div className="col-span-2 sm:col-span-1">
-                    <InputField
-                        label="Username" 
-                        name="username" 
-                        defaultValue={data?.username} 
-                        register={register} 
-                        error={errors.username}  
-                    />
-                </div>
-                <div className="col-span-2 sm:col-span-1">
-                    <InputField
-                        label="Email" 
-                        name="email"
-                        type="email" 
-                        defaultValue={data?.email} 
-                        register={register} 
-                        error={errors.email}  
-                    />
-                </div>
-                <div className="col-span-2 sm:col-span-1">
-                    <InputField
-                        label="Password" 
-                        name="password" 
-                        type="password" 
-                        defaultValue={data?.password} 
-                        register={register} 
-                        error={errors.password}  
-                    />
-                </div>
+            <div className="flex justify-between flex-wrap gap-4">
+                <InputField
+                    label="Username" 
+                    name="username" 
+                    defaultValue={data?.username} 
+                    register={register} 
+                    error={errors.username}  
+                />
+                <InputField
+                    label="Email" 
+                    name="email"
+                    type="email" 
+                    defaultValue={data?.email} 
+                    register={register} 
+                    error={errors.email}  
+                />
+                <InputField
+                    label="Password" 
+                    name="password" 
+                    type="password" 
+                    defaultValue={data?.password} 
+                    register={register} 
+                    error={errors.password}  
+                />
             </div>
-            
-            <span className="text-xs text-gray-400 font-medium mb-1 sm:mb-0 mt-2 sm:mt-0">
+            <span className="text-xs text-gray-400 font-medium">
                 Personal Information
             </span>
-            
-            {/* Personal Information Section - Mobile: 2 columns, responsive for larger screens */}
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-4">
+            <div className="flex justify-between flex-wrap gap-4">
                 <InputField
                     label="First Name"
                     name="firstName"
@@ -137,16 +124,9 @@ const TeacherForm = ({
                     error={errors.birthday}
                     type="date"
                 />
-                
-                {/* Sex Selection */}
-                <div className="flex flex-col gap-1 sm:gap-2">
+                <div className="flex flex-col gap-2 w-full md:w-1/4">
                     <label className="text-xs text-gray-500">Sex</label>
-                    <select 
-                        className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full" 
-                        {...register("sex")} 
-                        defaultValue={data?.sex}
-                    >
-                        <option value="">Select Gender</option>
+                    <select className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full" {...register("sex")} defaultValue={data?.sex}>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </select>
@@ -156,30 +136,28 @@ const TeacherForm = ({
                         </p>
                     )}
                 </div>
-                
-                {/* Image Upload - Compact on mobile */}
-                <div className="flex flex-col gap-1 sm:gap-2 justify-center">
+                <div className="flex flex-col gap-2 w-full md:w-1/4 justify-center">
                     <label
-                        className="text-xs text-gray-500 flex items-center gap-1 sm:gap-2 cursor-pointer border-2 border-dashed border-gray-300 rounded-md p-2 sm:p-4 hover:border-gray-400 transition-colors"
+                        className="text-xs text-gray-500 flex items-center gap-2 cursor-pointer"
                         htmlFor="img"
                     >
-                        <Image src="/upload.png" alt="" width={16} height={16} className="sm:w-5 sm:h-5" />
-                        <span className="text-center text-xs sm:text-sm">Upload Photo</span>
+                        <Image src="/upload.png" alt="" width={28} height={28} />
+                        <span>Upload a photo</span>
                     </label>
                     <input type="file" id="img" {...register("img")} className="hidden" />
                     {errors.img?.message && (
                         <p className="text-xs text-red-400">
-                            {errors.img.message.toString()}
+                        {errors.img.message.toString()}
                         </p>
                     )}
                 </div>
             </div>
             
-            <button className="bg-blue-400 hover:bg-blue-500 text-white p-2 sm:p-3 rounded-md transition-colors w-full sm:w-auto sm:self-start text-sm sm:text-base mt-2 sm:mt-0">
-                {type === "create" ? "Create Teacher" : "Update Teacher"}
+            <button className="bg-blue-400 text-white p-2 rounded-md">
+                {type === "create" ? "Create" : "Update"}
             </button>
         </form>
     )
 }
 
-export default TeacherForm;
+export default AnnouncementForm;
