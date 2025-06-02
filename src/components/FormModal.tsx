@@ -11,7 +11,7 @@ const TeacherForm = dynamic(() => import("./forms/TeacherForm"),{
 })
 const StudentForm = dynamic(() => import("./forms/StudentForm"),{
     loading:() => <h1>Loading...</h1>
-})
+})  
 const ParentForm = dynamic(() => import("./forms/ParentForm"));
 const ClassForm = dynamic(() => import("./forms/ClassForm"));
 const SubjectForm = dynamic(() => import("./forms/SubjectForm"));
@@ -29,7 +29,7 @@ const forms:{
 }={
     teacher: (type,data) => <TeacherForm type={type} data={data} />,
     student: (type,data) => <StudentForm type={type} data={data} />,
-}
+}   
 
 const FormModal = ({
     table,
@@ -92,8 +92,8 @@ const FormModal = ({
                         <Form />
                         <div className="absolute top-4 right-4 cursor-pointer" onClick={()=>setOpen(false)}>
                             <Image src="/close.png" alt="" width={14} height={14}/>
-                        </div>
-                    </div>
+                        </div> 
+                    </div> 
                 </div> 
             }
         </>
